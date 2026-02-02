@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Perdón 🥺</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="card">
+      <h1>Lo siento mucho 💔</h1>
+      <p>
+        Sé que la cagué y no hay excusa. Ya no vuelvo a querer criticar tanto.
+      </p>
+
+      <p class="question">¿Me perdonas?</p>
+
+      <button id="yes">Sí 🥹</button>
+      <button id="no">No</button>
+    </div>
+
+    <script>
+      const noBtn = document.getElementById("no");
+
+      noBtn.addEventListener("touchstart", mover);
+      noBtn.addEventListener("mouseover", mover);
+
+      function mover() {
+        const x = Math.random() * 200 - 100;
+        const y = Math.random() * 200 - 100;
+        noBtn.style.transform = `translate(${x}px, ${y}px)`;
+      }
+
+      document.getElementById("yes").addEventListener("click", () => {
+        document.body.innerHTML = `
+        <div class="card">
+          <h1>Gracias ❤️</h1>
+          <p>Prometo que no vuelve a suceder.</p>
+        </div>
+      `;
+      });
+    </script>
+  </body>
+</html>
