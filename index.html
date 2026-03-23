@@ -1,44 +1,149 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="es">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Perdón 🥺</title>
-    <link rel="stylesheet" href="style.css" />
+    <title>Perdóname ❤️</title>
+
+    <style>
+      body {
+        margin: 0;
+        height: 100vh;
+        background: radial-gradient(circle, #1a1a1a, #000);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-family: "Segoe UI";
+        color: white;
+        overflow: hidden;
+      }
+
+      /* Pantalla inicial */
+      .inicio {
+        text-align: center;
+      }
+
+      button {
+        padding: 12px 25px;
+        border: none;
+        background: #ff4b7d;
+        color: white;
+        border-radius: 30px;
+        cursor: pointer;
+        font-size: 1rem;
+      }
+
+      /* Carta */
+      .carta {
+        position: absolute;
+        width: 80%;
+        max-width: 500px;
+        background: white;
+        color: #333;
+        padding: 30px;
+        border-radius: 15px;
+        text-align: center;
+        transform: scale(0);
+        transition: 0.6s;
+      }
+
+      .carta.mostrar {
+        transform: scale(1);
+      }
+
+      /* Texto máquina */
+      #texto {
+        border-right: 2px solid black;
+        white-space: pre-line;
+        overflow: hidden;
+      }
+
+      /* Corazones */
+      .corazon {
+        position: absolute;
+        color: #ff4b7d;
+        font-size: 20px;
+        animation: subir 5s linear infinite;
+      }
+
+      @keyframes subir {
+        from {
+          transform: translateY(100vh);
+          opacity: 1;
+        }
+        to {
+          transform: translateY(-10vh);
+          opacity: 0;
+        }
+      }
+    </style>
   </head>
+
   <body>
-    <div class="card">
-      <h1>Lo siento mucho 💔</h1>
-      <p>
-        Sé que la cagué y no hay excusa. Ya no vuelvo a querer criticar tanto.
-      </p>
+    <div class="inicio" id="inicio">
+      <h1>Necesito decirte algo... 💔</h1>
+      <button onclick="abrirCarta()">Escuchame</button>
+    </div>
 
-      <p class="question">¿Me perdonas?</p>
-
-      <button id="yes">Sí 🥹</button>
-      <button id="no">No</button>
+    <div class="carta" id="carta">
+      <h2>Perdóname ❤️</h2>
+      <p id="texto"></p>
     </div>
 
     <script>
-      const noBtn = document.getElementById("no");
+      function abrirCarta() {
+        document.getElementById("inicio").style.display = "none";
+        const carta = document.getElementById("carta");
+        carta.classList.add("mostrar");
 
-      noBtn.addEventListener("touchstart", mover);
-      noBtn.addEventListener("mouseover", mover);
-
-      function mover() {
-        const x = Math.random() * 200 - 100;
-        const y = Math.random() * 200 - 100;
-        noBtn.style.transform = `translate(${x}px, ${y}px)`;
+        escribirTexto();
+        crearCorazones();
       }
 
-      document.getElementById("yes").addEventListener("click", () => {
-        document.body.innerHTML = `
-        <div class="card">
-          <h1>Gracias ❤️</h1>
-          <p>Prometo que no vuelve a suceder.</p>
-        </div>
-      `;
-      });
+      // ✍️ ESCRIBE TU MENSAJE AQUÍ
+      const mensaje = `Andrea perdon por no ser perfecto pero cada dia trato de ser mejor persona, lo siento por no captar todo desde que me dices.
+
+      No me gusta hacerte sentir mal odio eso
+      y quisiera que me dejes demostrar que si puedo cambiar
+      y ser mejor persona de lo que fui ayer.
+
+
+Te amo mucho
+Con mucho amor 
+Edwin ❤️`;
+
+      let i = 0;
+
+      function escribirTexto() {
+        const texto = document.getElementById("texto");
+
+        function escribir() {
+          if (i < mensaje.length) {
+            texto.innerHTML += mensaje.charAt(i);
+            i++;
+            setTimeout(escribir, 40);
+          }
+        }
+
+        escribir();
+      }
+
+      // ❤️ Corazones animados
+      function crearCorazones() {
+        setInterval(() => {
+          const corazon = document.createElement("div");
+          corazon.classList.add("corazon");
+          corazon.innerHTML = "❤️";
+
+          corazon.style.left = Math.random() * 100 + "vw";
+          corazon.style.fontSize = Math.random() * 20 + 10 + "px";
+
+          document.body.appendChild(corazon);
+
+          setTimeout(() => {
+            corazon.remove();
+          }, 5000);
+        }, 300);
+      }
     </script>
   </body>
 </html>
